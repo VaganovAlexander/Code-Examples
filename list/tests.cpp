@@ -1,4 +1,4 @@
-#include "stackallocator.h"
+#include "list+stackallocator.h"
 
 #include <sys/resource.h>
 
