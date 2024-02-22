@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  app:
+    image: game
+    container_name: game
+    network_mode: host
+    environment:
+      - DISPLAY=:0
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev/dri:/dev/dri
+    entrypoint: [ "/bin/bash", "-c" ]
+    command:
+      - ign gazebo shapes.sdf -v4
