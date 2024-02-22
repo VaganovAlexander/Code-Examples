@@ -1,0 +1,27 @@
+name: Testing
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "*" ]
+
+permissions: write-all
+
+jobs:
+  Tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Prepare System
+        run: sudo apt-get install -y cmake libgtest-dev g++ libsfml-dev
+      - name: PacManBuild
+        run: cd PacManGame && ./install.sh
+      - name: PacManTests
+        run: cd PacManGame && mkdir build && cd build && cmake .. && make && chmod +x Tests && ./Tests
+      - name: BigIntegerTests
+        run: cd BigInteger && g++ -std=c++20 tests.cpp -o tests && ./tests
+      - name: RegExprTests
+        run: cd check_if_regexpr_contains_word && g++ -std=c++20 tests.cpp -o tests && ./tests
+      - name: ListTests
+        run: cd list && g++ -std=c++20 tests.cpp -o tests && ./tests
